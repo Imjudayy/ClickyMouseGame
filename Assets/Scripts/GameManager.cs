@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("UI Elements")]
     // NOTE: TextMeshProUGUI requires "using TMPro"
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI bestScoreText;
     // NOTE: TextMeshProUGUI requires "using TMPro"
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Button hardButton;
 
     private int score;
+    private int bestScore;
     private bool isGameActive = true;
     private float spawnRate = 1.0f;
 
@@ -33,9 +35,7 @@ public class GameManager : MonoBehaviour
     {
         easyButton.onClick.AddListener(StartEasy);
         mediumButton.onClick.AddListener(() => { StartGame(2f); });
-        hardButton.onClick.AddListener(() => {
-            StartGame(4f);
-        });
+        hardButton.onClick.AddListener(() => { StartGame(4f); });
     }
 
     void StartEasy()
@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Game Start";
         titleScreen.SetActive(true);
         gameOverScreen.SetActive(false);
+
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        bestScoreText.text = "Best Score: " + bestScore.ToString();
     }
 
     void StartGame(float dificulty)
@@ -77,6 +80,15 @@ public class GameManager : MonoBehaviour
     {
         StopCoroutine(spawnRoutine);
         gameOverScreen.SetActive(true);
+
+        if (score > bestScore)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            PlayerPrefs.Save();
+        }
+
+        bestScoreText.text = "Best Score: " + bestScore.ToString();
     }
 
     // Ver.1
