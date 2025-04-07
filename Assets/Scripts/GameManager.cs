@@ -31,8 +31,15 @@ public class GameManager : MonoBehaviour
 
     private Coroutine spawnRoutine;
 
+    public static bool isRestarted = false;
+
     void Awake()
     {
+        if (!isRestarted)
+        {
+            PlayerPrefs.DeleteKey("BestScore");
+        }
+
         easyButton.onClick.AddListener(StartEasy);
         mediumButton.onClick.AddListener(() => { StartGame(2f); });
         hardButton.onClick.AddListener(() => { StartGame(4f); });
@@ -94,13 +101,11 @@ public class GameManager : MonoBehaviour
     // Ver.1
     public void Restart()
     {
+        isRestarted = true;
         var s = SceneManager.GetActiveScene();
         SceneManager.LoadScene(s.name);
     }
 
-    void OnApplicationQuit()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+   
 }
 
