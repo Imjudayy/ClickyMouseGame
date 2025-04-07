@@ -10,8 +10,8 @@ public class Target : MonoBehaviour, IPointerClickHandler
     private float minSpeed = 12;
     private float maxSpeed = 16;
     private float maxTorque = 10;
-    private float xRange = 4;
-    private float ySpawnPos = -6;
+    private float xRange = 2;
+    private float ySpawnPos = -2;
     private Rigidbody rb;
 
     public int point;
