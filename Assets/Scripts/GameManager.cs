@@ -98,6 +98,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(s.name);
     }
 
-
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
 
