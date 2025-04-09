@@ -36,4 +36,13 @@ public class MenuTarget : MonoBehaviour
     {
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sensor"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
