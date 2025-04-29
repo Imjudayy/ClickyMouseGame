@@ -106,6 +106,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(s.name);
     }
 
-   
+   public void BackToMainMenu()
+   {
+        SceneManager.LoadScene("MainMenu");
+   }
 }
 
